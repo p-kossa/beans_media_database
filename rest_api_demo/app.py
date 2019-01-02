@@ -1,7 +1,7 @@
 import logging.config
 
 import os
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, render_template
 from rest_api_demo import settings
 from rest_api_demo.api.blog.endpoints.posts import ns as blog_posts_namespace
 from rest_api_demo.api.blog.endpoints.categories import ns as blog_categories_namespace
@@ -40,6 +40,13 @@ def main():
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     app.run(host='0.0.0.0', debug=settings.FLASK_DEBUG)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def render_frontend():
+    """Render homepage"""
+
+    return render_template('index.html')
 
 
 if __name__ == "__main__":

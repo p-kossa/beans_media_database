@@ -7,8 +7,8 @@ from sqlalchemy.orm.exc import NoResultFound
 
 log = logging.getLogger(__name__)
 
-api = Api(version='1.0', title='My Blog API',
-          description='A simple demonstration of a Flask RestPlus powered API')
+api = Api(version='1.0', title='Beans Media Database API',
+          description='Beans Media Database API for all your HTPC needs')
 
 
 @api.errorhandler
