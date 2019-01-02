@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  beans_media_database:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/opt/app'
+    ports:
+      - 5000:5000
+      - 8000:8000
+      - 8888:8888

@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name='rest_api_demo',
     version='1.0.0',
-    description='Boilerplate code for a RESTful API based on Flask-RESTPlus',
+    description='RESTful API for Beans Media Database',
     url='https://github.com/postrational/rest_api_demo',
-    author='Michal Karzynski',
+    author='Kevin Ossa',
 
     classifiers=[
         'Development Status :: 5 - Production/Stable',
