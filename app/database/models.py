@@ -1,6 +1,5 @@
 from datetime import datetime
-
-from rest_api_demo.database import db
+from app.database import db
 
 
 class Post(db.Model):

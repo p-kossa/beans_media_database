@@ -4,7 +4,7 @@ setup(
     name='Beans Media Database',
     version='1.0.0',
     description='RESTful API for Beans Media Database',
-    url='https://github.com/postrational/rest_api_demo',
+    url='https://github.com/p-kossa/beans_media_database',
     author='Kevin Ossa',
 
     classifiers=[
