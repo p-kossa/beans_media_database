@@ -1,8 +1,8 @@
-from rest_api_demo.database import db
-from rest_api_demo.database.models import Post, Category
+from app.database import db
+from app.database.models import Post, Category
 
 
-def create_blog_post(data):
+def create_movie(data):
     title = data.get('title')
     body = data.get('body')
     category_id = data.get('category_id')
@@ -12,7 +12,7 @@ def create_blog_post(data):
     db.session.commit()
 
 
-def update_post(post_id, data):
+def update_movie(post_id, data):
     post = Post.query.filter(Post.id == post_id).one()
     post.title = data.get('title')
     post.body = data.get('body')
@@ -22,7 +22,7 @@ def update_post(post_id, data):
     db.session.commit()
 
 
-def delete_post(post_id):
+def delete_movie(post_id):
     post = Post.query.filter(Post.id == post_id).one()
     db.session.delete(post)
     db.session.commit()

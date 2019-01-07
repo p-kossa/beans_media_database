@@ -2,11 +2,11 @@ import logging
 
 from flask import request
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import create_blog_post, update_post, delete_post
-from rest_api_demo.api.blog.serializers import blog_post, page_of_blog_posts
-from rest_api_demo.api.blog.parsers import pagination_arguments
-from rest_api_demo.api.restplus import api
-from rest_api_demo.database.models import Post
+from app.api.movies.helpers import create_movie, update_movie, delete_movie
+from app.api.movies.serializers import movie_post, page_of_movie_posts
+from app.api.movies.parsers import pagination_arguments
+from app.api.restplus import api
+from app.database.models import Post
 
 log = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ ns = api.namespace('blog/posts', description='Operations related to blog posts')
 class PostsCollection(Resource):
 
     @api.expect(pagination_arguments)
-    @api.marshal_with(page_of_blog_posts)
+    @api.marshal_with(page_of_movie_posts)
     def get(self):
         """
         Returns list of blog posts.
@@ -31,12 +31,12 @@ class PostsCollection(Resource):
 
         return posts_page
 
-    @api.expect(blog_post)
+    @api.expect(movie_post)
     def post(self):
         """
         Creates a new blog post.
         """
-        create_blog_post(request.json)
+        create_movie(request.json)
         return None, 201
 
 
@@ -44,21 +44,21 @@ class PostsCollection(Resource):
 @api.response(404, 'Post not found.')
 class PostItem(Resource):
 
-    @api.marshal_with(blog_post)
+    @api.marshal_with(movie_post)
     def get(self, id):
         """
         Returns a blog post.
         """
         return Post.query.filter(Post.id == id).one()
 
-    @api.expect(blog_post)
+    @api.expect(movie_post)
     @api.response(204, 'Post successfully updated.')
     def put(self, id):
         """
         Updates a blog post.
         """
         data = request.json
-        update_post(id, data)
+        update_movie(id, data)
         return None, 204
 
     @api.response(204, 'Post successfully deleted.')
@@ -66,7 +66,7 @@ class PostItem(Resource):
         """
         Deletes blog post.
         """
-        delete_post(id)
+        delete_movie(id)
         return None, 204
 
 
@@ -76,10 +76,10 @@ class PostItem(Resource):
 class PostsArchiveCollection(Resource):
 
     @api.expect(pagination_arguments, validate=True)
-    @api.marshal_with(page_of_blog_posts)
+    @api.marshal_with(page_of_movie_posts)
     def get(self, year, month=None, day=None):
         """
-        Returns list of blog posts from a specified time period.
+        Returns list of databse entries from a specified time period.
         """
         args = pagination_arguments.parse_args(request)
         page = args.get('page', 1)

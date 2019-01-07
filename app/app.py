@@ -3,8 +3,8 @@ import logging.config
 import os
 from flask import Flask, Blueprint, render_template
 from app import settings
-from app.api.blog.endpoints.posts import ns as blog_posts_namespace
-from app.api.blog.endpoints.categories import ns as blog_categories_namespace
+from app.api.movies.endpoints.posts import ns as blog_posts_namespace
+from app.api.movies.endpoints.categories import ns as blog_categories_namespace
 from app.api.restplus import api
 from app.database import db
 

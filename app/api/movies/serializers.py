@@ -1,9 +1,9 @@
 from flask_restplus import fields
-from rest_api_demo.api.restplus import api
+from app.api.restplus import api
 
-blog_post = api.model('Blog post', {
-    'id': fields.Integer(readOnly=True, description='The unique identifier of a blog post'),
-    'title': fields.String(required=True, description='Article title'),
+movie_post = api.model('Movie post', {
+    'id': fields.Integer(readOnly=True, description='The unique identifier of a movie'),
+    'title': fields.String(required=True, description='Movie title'),
     'body': fields.String(required=True, description='Article content'),
     'pub_date': fields.DateTime,
     'category_id': fields.Integer(attribute='category.id'),
@@ -17,15 +17,15 @@ pagination = api.model('A page of results', {
     'total': fields.Integer(description='Total number of results'),
 })
 
-page_of_blog_posts = api.inherit('Page of blog posts', pagination, {
-    'items': fields.List(fields.Nested(blog_post))
+page_of_movie_posts = api.inherit('Page of movies', pagination, {
+    'items': fields.List(fields.Nested(movie_post))
 })
 
-category = api.model('Blog category', {
-    'id': fields.Integer(readOnly=True, description='The unique identifier of a blog category'),
+category = api.model('Movie category', {
+    'id': fields.Integer(readOnly=True, description='The unique identifier of a movie category'),
     'name': fields.String(required=True, description='Category name'),
 })
 
 category_with_posts = api.inherit('Blog category with posts', category, {
-    'posts': fields.List(fields.Nested(blog_post))
+    'posts': fields.List(fields.Nested(movie_post))
 })
