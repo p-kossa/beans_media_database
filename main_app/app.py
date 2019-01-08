@@ -2,11 +2,11 @@ import logging.config
 
 import os
 from flask import Flask, Blueprint, render_template
-from app import settings
-from app.api.movies.endpoints.posts import ns as blog_posts_namespace
-from app.api.movies.endpoints.categories import ns as blog_categories_namespace
-from app.api.restplus import api
-from app.database import db
+from main_app import settings
+from main_app.api.movies.endpoints.posts import ns as blog_posts_namespace
+from main_app.api.movies.endpoints.categories import ns as blog_categories_namespace
+from main_app.api.restplus import api
+from main_app.database import db
 
 app = Flask(__name__)
 logging_conf_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '../logging.conf'))
@@ -14,7 +14,7 @@ logging.config.fileConfig(logging_conf_path)
 log = logging.getLogger(__name__)
 
 
-def configure_app(flask_app):
+def configure_app(flask_app) -> None:
     flask_app.config['SERVER_NAME'] = settings.FLASK_SERVER_NAME
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = settings.SQLALCHEMY_TRACK_MODIFICATIONS
@@ -24,7 +24,7 @@ def configure_app(flask_app):
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
 
 
-def initialize_app(flask_app):
+def initialize_app(flask_app) -> None:
     configure_app(flask_app)
 
     blueprint = Blueprint('api', __name__, url_prefix='/api')
@@ -36,7 +36,7 @@ def initialize_app(flask_app):
     db.init_app(flask_app)
 
 
-def main():
+def main() -> None:
     initialize_app(app)
     log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     app.run(host='0.0.0.0', debug=settings.FLASK_DEBUG)

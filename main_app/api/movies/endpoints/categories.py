@@ -2,10 +2,10 @@ import logging
 
 from flask import request
 from flask_restplus import Resource
-from app.api.movies.helpers import create_category, delete_category, update_category
-from app.api.movies.serializers import category, category_with_posts
-from app.api.restplus import api
-from app.database.models import Category
+from main_app.api.movies.helpers import create_category, delete_category, update_category
+from main_app.api.movies.serializers import category, category_with_posts
+from main_app.api.restplus import api
+from main_app.database.models import Category
 
 log = logging.getLogger(__name__)
 

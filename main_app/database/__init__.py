@@ -4,6 +4,6 @@ db = SQLAlchemy()
 
 
 def reset_database():
-    from app.database.models import Post, Category
+    from main_app.database.models import Post, Category
     db.drop_all()
     db.create_all()

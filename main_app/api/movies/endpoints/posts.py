@@ -2,11 +2,11 @@ import logging
 
 from flask import request
 from flask_restplus import Resource
-from app.api.movies.helpers import create_movie, update_movie, delete_movie
-from app.api.movies.serializers import movie_post, page_of_movie_posts
-from app.api.movies.parsers import pagination_arguments
-from app.api.restplus import api
-from app.database.models import Post
+from main_app.api.movies.helpers import create_movie, update_movie, delete_movie
+from main_app.api.movies.serializers import movie_post, page_of_movie_posts
+from main_app.api.movies.parsers import pagination_arguments
+from main_app.api.restplus import api
+from main_app.database.models import Post
 
 log = logging.getLogger(__name__)
 
