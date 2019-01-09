@@ -5,6 +5,7 @@ from flask import Flask, Blueprint, render_template
 from main_app import settings
 from main_app.api.movies.endpoints.posts import ns as blog_posts_namespace
 from main_app.api.movies.endpoints.categories import ns as blog_categories_namespace
+from main_app.api.movies.endpoints.list_movies import ns as blog_list_movies_namespace
 from main_app.api.restplus import api
 from main_app.database import db
 
@@ -22,6 +23,7 @@ def configure_app(flask_app) -> None:
     flask_app.config['RESTPLUS_VALIDATE'] = settings.RESTPLUS_VALIDATE
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
+    flask_app.config['MOVIEDB_API_KEY'] = settings.MOVIEDB_API_KEY
 
 
 def initialize_app(flask_app) -> None:
@@ -31,6 +33,7 @@ def initialize_app(flask_app) -> None:
     api.init_app(blueprint)
     api.add_namespace(blog_posts_namespace)
     api.add_namespace(blog_categories_namespace)
+    api.add_namespace(blog_list_movies_namespace)
     flask_app.register_blueprint(blueprint)
 
     db.init_app(flask_app)
